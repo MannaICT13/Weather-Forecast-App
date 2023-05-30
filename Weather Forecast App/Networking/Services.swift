@@ -11,7 +11,7 @@ import Alamofire
 private struct WeatherRoute: APIRouteable {
     
     var baseURL: String = Environment.shared.baseURL.absoluteString
-    var path: String = "data/2.5/forecast"
+    var path: String = "/data/2.5/forecast"
     var method: HTTPMethod = .get
     var parameters: Parameter?
     
