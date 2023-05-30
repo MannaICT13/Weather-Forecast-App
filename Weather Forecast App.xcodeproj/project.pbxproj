@@ -54,14 +54,54 @@
 		2AB1546C2A263A95004BF234 /* Weather Forecast App */ = {
 			isa = PBXGroup;
 			children = (
-				2AB1546D2A263A95004BF234 /* AppDelegate.swift */,
-				2AB154712A263A95004BF234 /* ViewController.swift */,
-				2AB154732A263A95004BF234 /* Main.storyboard */,
-				2AB154762A263A97004BF234 /* Assets.xcassets */,
-				2AB154782A263A97004BF234 /* LaunchScreen.storyboard */,
-				2AB1547B2A263A97004BF234 /* Info.plist */,
+				2AB154812A26428A004BF234 /* App */,
+				2AB154822A264294004BF234 /* ViewController */,
+				2AB154832A2642A6004BF234 /* Storyboard */,
+				2AB154842A2642D3004BF234 /* Resources */,
+				2AB154852A2642E3004BF234 /* SupportFile */,
 			);
 			path = "Weather Forecast App";
+			sourceTree = "<group>";
+		};
+		2AB154812A26428A004BF234 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2AB1546D2A263A95004BF234 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2AB154822A264294004BF234 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AB154712A263A95004BF234 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AB154832A2642A6004BF234 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				2AB154732A263A95004BF234 /* Main.storyboard */,
+				2AB154782A263A97004BF234 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		2AB154842A2642D3004BF234 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2AB154762A263A97004BF234 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2AB154852A2642E3004BF234 /* SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+				2AB1547B2A263A97004BF234 /* Info.plist */,
+			);
+			path = SupportFile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,7 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Weather Forecast App/Info.plist";
+				INFOPLIST_FILE = "Weather Forecast App/SupportFile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -312,7 +352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Weather Forecast App/Info.plist";
+				INFOPLIST_FILE = "Weather Forecast App/SupportFile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
