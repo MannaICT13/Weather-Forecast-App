@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherViewController.swift
 //  Weather Forecast App
 //
 //  Created by Md Khaled Hasan Manna on 30/5/23.
@@ -7,13 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class WeatherViewController: UIViewController {
+    
+    let viewModel = WeatherViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        viewModel.fetchWeatherInfo()
     }
-
-
 }
 
