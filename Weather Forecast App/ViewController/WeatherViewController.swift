@@ -9,8 +9,10 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
+    let viewModel = WeatherViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchWeatherInfo()
     }
 }
 
