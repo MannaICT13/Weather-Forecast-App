@@ -13,8 +13,8 @@
 		2AAF16462A266D610082E2B9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF16452A266D610082E2B9 /* APIClient.swift */; };
 		2AAF16482A266D890082E2B9 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF16472A266D890082E2B9 /* Services.swift */; };
 		2AAF164B2A266DE10082E2B9 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF164A2A266DE10082E2B9 /* WeatherResponse.swift */; };
+		2AAF164D2A266EED0082E2B9 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF164C2A266EED0082E2B9 /* WeatherViewController.swift */; };
 		2AB1546E2A263A95004BF234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1546D2A263A95004BF234 /* AppDelegate.swift */; };
-		2AB154722A263A95004BF234 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB154712A263A95004BF234 /* ViewController.swift */; };
 		2AB154752A263A95004BF234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB154732A263A95004BF234 /* Main.storyboard */; };
 		2AB154772A263A97004BF234 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AB154762A263A97004BF234 /* Assets.xcassets */; };
 		2AB1547A2A263A97004BF234 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB154782A263A97004BF234 /* LaunchScreen.storyboard */; };
@@ -28,9 +28,9 @@
 		2AAF16452A266D610082E2B9 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		2AAF16472A266D890082E2B9 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		2AAF164A2A266DE10082E2B9 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		2AAF164C2A266EED0082E2B9 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		2AB1546A2A263A95004BF234 /* Weather Forecast App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Forecast App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB1546D2A263A95004BF234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2AB154712A263A95004BF234 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2AB154742A263A95004BF234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AB154762A263A97004BF234 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AB154792A263A97004BF234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		2AB154822A264294004BF234 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2AB154712A263A95004BF234 /* ViewController.swift */,
+				2AAF164C2A266EED0082E2B9 /* WeatherViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -293,12 +293,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AB154722A263A95004BF234 /* ViewController.swift in Sources */,
 				2AAF16442A266D240082E2B9 /* NetworkResponse.swift in Sources */,
 				2AAF16422A266CE50082E2B9 /* Environment.swift in Sources */,
 				2AAF16482A266D890082E2B9 /* Services.swift in Sources */,
 				2AAF163C2A266C330082E2B9 /* APIRoute.swift in Sources */,
 				2AB1546E2A263A95004BF234 /* AppDelegate.swift in Sources */,
+				2AAF164D2A266EED0082E2B9 /* WeatherViewController.swift in Sources */,
 				2AAF16462A266D610082E2B9 /* APIClient.swift in Sources */,
 				2AAF164B2A266DE10082E2B9 /* WeatherResponse.swift in Sources */,
 			);
