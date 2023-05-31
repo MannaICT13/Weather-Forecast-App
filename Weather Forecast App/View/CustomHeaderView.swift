@@ -7,17 +7,26 @@
 
 import UIKit
 
+extension CustomHeaderView {
+    class Callback {
+        var didTappedMap: () -> Void = { }
+        var didTappedSetting: () -> Void = { }
+    }
+}
+
 class CustomHeaderView: UITableViewHeaderFooterView {
-    @IBOutlet weak var mapButtonOutlet: UIButton!
-    @IBOutlet weak var settingButtonOutlet: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var mapButtonOutlet: UIButton!
+    @IBOutlet private weak var settingButtonOutlet: UIButton!
+    @IBOutlet private weak var titleLabel: UILabel!
     
+    let callback = Callback()
     @IBAction func mapButtonTapped(_ sender: UIButton) {
+        callback.didTappedMap()
         print("Map")
     }
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
+        callback.didTappedSetting()
         print("Setting")
     }
-    
 }
