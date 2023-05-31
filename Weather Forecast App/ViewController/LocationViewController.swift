@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import MapKit
 
+protocol LocationViewControllerDelegate: AnyObject {
+    func getCoordinate(latitude: Double?, longitude: Double?)
+}
+
 class LocationViewController: UIViewController {
     
     @IBOutlet private weak var mapView: MKMapView! {
@@ -16,6 +20,7 @@ class LocationViewController: UIViewController {
             mapView.delegate = self
         }
     }
+    weak var delegate: LocationViewControllerDelegate?
     
     private var selectedLocation: CLLocationCoordinate2D?
     private var selectedPin: MKPointAnnotation?
@@ -45,6 +50,7 @@ extension LocationViewController: MKMapViewDelegate {
          selectedPin = pin
          
          print("Selected Location - Latitude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
+        delegate?.getCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude)
      }
 }
 
