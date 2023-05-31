@@ -41,6 +41,14 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView() as CustomHeaderView
+        headerView.callback.didTappedMap = {[weak self] in
+            let locationVC = LocationViewController.instantiate()
+            self?.navigationController?.pushViewController(locationVC, animated: true)
+        }
+        
+        headerView.callback.didTappedSetting = {[weak self] in
+            
+        }
         return headerView
     }
     
