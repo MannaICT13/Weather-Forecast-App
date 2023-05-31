@@ -27,6 +27,7 @@ class LocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Select a location"
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
            mapView.addGestureRecognizer(tapGesture)
     }
