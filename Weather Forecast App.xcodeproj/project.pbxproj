@@ -10,6 +10,8 @@
 		2A87DC8F2A2797DC00CC93F0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */; };
 		2A87DC912A2799B400CC93F0 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */; };
 		2A87DC932A2799DD00CC93F0 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */; };
+		2A87DC952A27B94000CC93F0 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC942A27B94000CC93F0 /* LocationViewController.swift */; };
+		2A87DC982A27BCBB00CC93F0 /* SharedProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC972A27BCBB00CC93F0 /* SharedProtocols.swift */; };
 		2AAF163C2A266C330082E2B9 /* APIRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF163B2A266C330082E2B9 /* APIRoute.swift */; };
 		2AAF16422A266CE50082E2B9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF16412A266CE50082E2B9 /* Environment.swift */; };
 		2AAF16442A266D240082E2B9 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF16432A266D240082E2B9 /* NetworkResponse.swift */; };
@@ -29,6 +31,8 @@
 		2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
+		2A87DC942A27B94000CC93F0 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		2A87DC972A27BCBB00CC93F0 /* SharedProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedProtocols.swift; sourceTree = "<group>"; };
 		2AAF163B2A266C330082E2B9 /* APIRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoute.swift; sourceTree = "<group>"; };
 		2AAF16412A266CE50082E2B9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		2AAF16432A266D240082E2B9 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				2A87DC8D2A2797B700CC93F0 /* Extensions */,
+				2A87DC962A27BC7100CC93F0 /* Router */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -83,6 +88,14 @@
 				2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2A87DC962A27BC7100CC93F0 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2A87DC972A27BCBB00CC93F0 /* SharedProtocols.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		2AAF163D2A266C900082E2B9 /* Model */ = {
@@ -166,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				2AAF164C2A266EED0082E2B9 /* WeatherViewController.swift */,
+				2A87DC942A27B94000CC93F0 /* LocationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -340,7 +354,9 @@
 			files = (
 				2AAF16442A266D240082E2B9 /* NetworkResponse.swift in Sources */,
 				2AAF16502A266F910082E2B9 /* WeatherViewModel.swift in Sources */,
+				2A87DC982A27BCBB00CC93F0 /* SharedProtocols.swift in Sources */,
 				2AAF16422A266CE50082E2B9 /* Environment.swift in Sources */,
+				2A87DC952A27B94000CC93F0 /* LocationViewController.swift in Sources */,
 				2AAF16482A266D890082E2B9 /* Services.swift in Sources */,
 				2AAF163C2A266C330082E2B9 /* APIRoute.swift in Sources */,
 				2AB1546E2A263A95004BF234 /* AppDelegate.swift in Sources */,
