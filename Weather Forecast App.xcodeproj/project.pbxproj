@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A87DC8F2A2797DC00CC93F0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */; };
+		2A87DC912A2799B400CC93F0 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */; };
+		2A87DC932A2799DD00CC93F0 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */; };
 		2AAF163C2A266C330082E2B9 /* APIRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF163B2A266C330082E2B9 /* APIRoute.swift */; };
 		2AAF16422A266CE50082E2B9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF16412A266CE50082E2B9 /* Environment.swift */; };
 		2AAF16442A266D240082E2B9 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF16432A266D240082E2B9 /* NetworkResponse.swift */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
+		2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
 		2AAF163B2A266C330082E2B9 /* APIRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoute.swift; sourceTree = "<group>"; };
 		2AAF16412A266CE50082E2B9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		2AAF16432A266D240082E2B9 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
@@ -54,6 +60,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A87DC8B2A2796F300CC93F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */,
+				2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2A87DC8C2A27979B00CC93F0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2A87DC8D2A2797B700CC93F0 /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2A87DC8D2A2797B700CC93F0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2AAF163D2A266C900082E2B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,10 +142,12 @@
 			children = (
 				2AB154812A26428A004BF234 /* App */,
 				2AAF163D2A266C900082E2B9 /* Model */,
+				2A87DC8B2A2796F300CC93F0 /* View */,
 				2AAF164E2A266F660082E2B9 /* ViewModel */,
 				2AB154862A264384004BF234 /* Networking */,
 				2AB154822A264294004BF234 /* ViewController */,
 				2AB154832A2642A6004BF234 /* Storyboard */,
+				2A87DC8C2A27979B00CC93F0 /* Helpers */,
 				2AB154842A2642D3004BF234 /* Resources */,
 				2AB154852A2642E3004BF234 /* SupportFile */,
 			);
@@ -249,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A87DC932A2799DD00CC93F0 /* CustomHeaderView.xib in Resources */,
 				2AB1547A2A263A97004BF234 /* LaunchScreen.storyboard in Resources */,
 				2AB154772A263A97004BF234 /* Assets.xcassets in Resources */,
 				2AB154752A263A95004BF234 /* Main.storyboard in Resources */,
@@ -311,6 +345,8 @@
 				2AAF163C2A266C330082E2B9 /* APIRoute.swift in Sources */,
 				2AB1546E2A263A95004BF234 /* AppDelegate.swift in Sources */,
 				2AAF164D2A266EED0082E2B9 /* WeatherViewController.swift in Sources */,
+				2A87DC8F2A2797DC00CC93F0 /* UITableView.swift in Sources */,
+				2A87DC912A2799B400CC93F0 /* CustomHeaderView.swift in Sources */,
 				2AAF16462A266D610082E2B9 /* APIClient.swift in Sources */,
 				2AAF164B2A266DE10082E2B9 /* WeatherResponse.swift in Sources */,
 			);
