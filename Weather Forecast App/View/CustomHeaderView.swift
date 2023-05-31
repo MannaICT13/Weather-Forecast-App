@@ -18,8 +18,12 @@ class CustomHeaderView: UITableViewHeaderFooterView {
     @IBOutlet private weak var mapButtonOutlet: UIButton!
     @IBOutlet private weak var settingButtonOutlet: UIButton!
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var foreCastImageView: UIImageView!
+    @IBOutlet private weak var temparatureLabel: UILabel!
+    @IBOutlet private weak var weatherInfoLabel: UILabel!
     
     let callback = Callback()
+    
     @IBAction func mapButtonTapped(_ sender: UIButton) {
         callback.didTappedMap()
         print("Map")
