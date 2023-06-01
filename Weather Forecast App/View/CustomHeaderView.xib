@@ -67,7 +67,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqO-ZQ-xm6">
                             <rect key="frame" x="0.0" y="64" width="375" height="100"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="8pr-bv-Bks">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloudy2" translatesAutoresizingMaskIntoConstraints="NO" id="8pr-bv-Bks">
                                     <rect key="frame" x="147.66666666666666" y="10" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="JiZ-Fc-tUd"/>
@@ -85,14 +85,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D2n-sd-xJy">
                             <rect key="frame" x="0.0" y="164" width="375" height="60"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abz-7t-t1Q">
-                                    <rect key="frame" x="168.66666666666666" y="17" width="38" height="26.333333333333329"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abz-7t-t1Q">
+                                    <rect key="frame" x="160.66666666666666" y="17" width="53.666666666666657" height="26.333333333333329"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunny" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOo-kL-yU9">
-                                    <rect key="frame" x="210.66666666666666" y="28.999999999999996" width="36" height="14.333333333333332"/>
+                                    <rect key="frame" x="218.33333333333334" y="28.999999999999996" width="36" height="14.333333333333332"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -144,6 +144,7 @@
         </view>
     </objects>
     <resources>
+        <image name="cloudy2" width="128" height="128"/>
         <image name="pin" width="512" height="512"/>
         <image name="settings" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
