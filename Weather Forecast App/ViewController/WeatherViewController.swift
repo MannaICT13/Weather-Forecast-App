@@ -24,6 +24,13 @@ class WeatherViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchWeatherInfo()
+        viewModel.callback.didSuccess = {[weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        viewModel.callback.didFailure = {[weak self] error in
+            print(error)
+        }
     }
 }
 
@@ -44,6 +51,8 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView() as CustomHeaderView
+        
+        headerView.model = viewModel.model
         headerView.callback.didTappedMap = {[weak self] in
             let locationVC = LocationViewController.instantiate()
             locationVC.delegate = self
