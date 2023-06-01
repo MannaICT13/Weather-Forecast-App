@@ -73,12 +73,12 @@ extension WeatherViewController: UITableViewDelegate {
 extension WeatherViewController: LocationViewControllerDelegate {
     func getCoordinate(latitude: Double?, longitude: Double?) {
         if let latitude = latitude, let longitude = longitude {
-            viewModel.latitude = "\(latitude)"
-            viewModel.longitude = "\(longitude)"
+            viewModel.latitude = latitude
+            viewModel.longitude = longitude
         } else {
             // here current location
-            viewModel.latitude = "22.457331"
-            viewModel.longitude = "-0.127758"
+            viewModel.latitude = 22.457331
+            viewModel.longitude = -0.127758
         }
     }
 }
