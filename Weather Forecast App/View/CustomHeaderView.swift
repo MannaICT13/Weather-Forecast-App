@@ -14,6 +14,13 @@ extension CustomHeaderView {
     }
 }
 
+struct CustomViewModel {
+    let title: String
+    let foreCastImageName: String
+    let tempareture: String
+    let weatherInfo: String
+}
+
 class CustomHeaderView: UITableViewHeaderFooterView {
     @IBOutlet private weak var mapButtonOutlet: UIButton!
     @IBOutlet private weak var settingButtonOutlet: UIButton!
@@ -23,6 +30,17 @@ class CustomHeaderView: UITableViewHeaderFooterView {
     @IBOutlet private weak var weatherInfoLabel: UILabel!
     
     let callback = Callback()
+    
+    
+    var model: CustomViewModel? {
+        didSet {
+            guard let model = model else { return }
+            titleLabel.text = model.title
+            foreCastImageView.image = UIImage(named: model.foreCastImageName)
+            temparatureLabel.text = model.tempareture
+            weatherInfoLabel.text = model.weatherInfo
+        }
+    }
     
     @IBAction func mapButtonTapped(_ sender: UIButton) {
         callback.didTappedMap()
