@@ -9,14 +9,14 @@ import Foundation
 
 // MARK: - List
 struct WeatherResponseList: Codable {
-    let dt: Int
-    let main: MainClass
-    let weather: [Weather]
-    let clouds: Clouds
-    let wind: Wind
-    let visibility, pop: Int
-    let sys: Sys
-    let dtTxt: String
+    let dt: Int?
+    let main: MainClass?
+    let weather: [Weather]?
+    let clouds: Clouds?
+    let wind: Wind?
+    let visibility, pop: Int?
+    let sys: Sys?
+    let dtTxt: String?
 
     enum CodingKeys: String, CodingKey {
         case dt, main, weather, clouds, wind, visibility, pop, sys
@@ -26,14 +26,14 @@ struct WeatherResponseList: Codable {
 
 // MARK: - Clouds
 struct Clouds: Codable {
-    let all: Int
+    let all: Int?
 }
 
 // MARK: - MainClass
 struct MainClass: Codable {
-    let temp, feelsLike, tempMin, tempMax: Double
-    let pressure, seaLevel, grndLevel, humidity: Int
-    let tempKf: Double
+    let temp, feelsLike, tempMin, tempMax: Double?
+    let pressure, seaLevel, grndLevel, humidity: Int?
+    let tempKf: Double?
 
     enum CodingKeys: String, CodingKey {
         case temp
@@ -50,7 +50,7 @@ struct MainClass: Codable {
 
 // MARK: - Sys
 struct Sys: Codable {
-    let pod: Pod
+    let pod: Pod?
 }
 
 enum Pod: String, Codable {
@@ -60,10 +60,10 @@ enum Pod: String, Codable {
 
 // MARK: - Weather
 struct Weather: Codable {
-    let id: Int
-    let main: MainEnum
-    let description: Description
-    let icon: String
+    let id: Int?
+    let main: String?
+    let description: Description?
+    let icon: String?
 }
 
 enum Description: String, Codable {
@@ -81,7 +81,29 @@ enum MainEnum: String, Codable {
 
 // MARK: - Wind
 struct Wind: Codable {
-    let speed: Double
-    let deg: Int
-    let gust: Double
+    let speed: Double?
+    let deg: Int?
+    let gust: Double?
+}
+
+
+struct City: Codable {
+    let id: Int?
+    let name: String?
+    let coord: Coordinate?
+    let country: String?
+    let population: Int?
+    let timezone: Int?
+    let sunrise: Int?
+    let sunset: Int?
+}
+
+struct Coordinate: Codable {
+    let lat: Double?
+    let lon: Double?
+}
+
+struct ClimetResponse: Codable {
+    var city: City?
+    var list: WeatherResponseList?
 }
