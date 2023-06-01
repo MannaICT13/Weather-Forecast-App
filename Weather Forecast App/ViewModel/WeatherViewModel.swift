@@ -6,24 +6,25 @@
 //
 
 import Foundation
+import Alamofire
 
 extension WeatherViewModel {
     class Callback {
         var didSuccess: () -> Void = { }
-        var didFailure: (String) -> Void = {_ in }
+        var didFailure: (AFError) -> Void = {_ in }
     }
 }
 
 class WeatherViewModel {
     
-    var latitude: String = ""
-    var longitude: String = ""
+    var latitude: Double = .zero
+    var longitude: Double = .zero
     let appid: String = "0d0c15cd1f4d893cca83a6b0061bbccb"
     let units: String = "metric"
     
     let callback = Callback()
     
-    var weatherResponse: [WeatherResponseList] = []
+    var weatherResponse: [WeatherResponse] = []
     
     private var id: Int {
         return weatherResponse.first?.weather?.first?.id ?? .zero
@@ -35,8 +36,16 @@ class WeatherViewModel {
     
     private var temparature: String {
         let temp = weatherResponse.first?.main?.temp ?? .zero
-        return String(temp)
+        var output: String = ""
+        if let degreeSymbol = "\u{00B0}".unicodeScalars.first {
+            let degreeString = String(degreeSymbol)
+            let temperatureString = String(format: "%.1f", temp)
+            
+            output = temperatureString + degreeString + "C"
+        }
+        return output
     }
+    
     
     private var weatherInfo: String {
         return weatherResponse.first?.weather?.first?.main ?? ""
@@ -75,10 +84,9 @@ class WeatherViewModel {
                     print(response.list)
                 }
             case .failure(let error):
-                self?.callback.didFailure(error.localizedDescription)
-                print(error.localizedDescription)
+                self?.callback.didFailure(error)
+                print(error)
             }
         }
     }
-    
 }
