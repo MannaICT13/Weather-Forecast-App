@@ -55,14 +55,15 @@ class WeatherViewModel {
         return model
     }
     
-    var firstFiveDays: [(String, Double, Double)] {
+    var firstFiveDays: [(String, String, Double, Double)] {
         var uniqueDates: Set<String> = []
-        var firstFiveDays: [(String, Double, Double)] = []
-
+        var firstFiveDays: [(String, String, Double, Double)] = []
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         for listItem in weatherResponse {
+            let id = listItem.weather?.first?.id ?? .zero
             let temperature = listItem.main?.temp ?? .zero
             let tempMax = listItem.main?.tempMax ?? .zero
             let tempMin = listItem.main?.tempMin ?? .zero
@@ -91,8 +92,9 @@ class WeatherViewModel {
             if Calendar.current.isDateInToday(date) {
                 day = "Today"
             }
+            let icon = updateWeatherIcon(id: id)
             
-            firstFiveDays.append((day, tempMax, tempMin))
+            firstFiveDays.append((day,icon, tempMax, tempMin))
             
             if firstFiveDays.count == 5 {
                 break
@@ -102,7 +104,7 @@ class WeatherViewModel {
     }
     
     private func updateWeatherIcon(id: Int) -> String {
-    switch (id) {
+        switch (id) {
         case 0...300 : return "tstorm1"
         case 301...500 : return "light_rain"
         case 501...600 : return "shower3"
