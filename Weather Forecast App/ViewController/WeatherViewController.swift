@@ -14,6 +14,7 @@ class WeatherViewController: UIViewController {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.registerNibHeaderFooter(CustomHeaderView.self)
+            tableView.registerNibCell(ForecastCell.self)
         }
     }
     
@@ -44,7 +45,8 @@ extension WeatherViewController: UITableViewDataSource {
         return 5
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = ForecastCell.deque(for: tableView, at: indexPath)
+        return cell
     }
 }
 // MARK: - TableView  Delegate
@@ -66,7 +68,7 @@ extension WeatherViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 56.0
+        return 226.0
     }
 }
 
