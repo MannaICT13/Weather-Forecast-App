@@ -9,8 +9,19 @@ import Foundation
 import UIKit
 
 extension UITableView {
+    func registerNibCell<T: UITableViewCell>(_ cellClass: T.Type, nibName: String = T.reuseID) {
+        register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: T.reuseID)
+    }
+    
     func registerNibHeaderFooter<T: UITableViewHeaderFooterView>(_ viewClass: T.Type, nibName: String = T.reuseID) {
         register(UINib(nibName: nibName, bundle: nil), forHeaderFooterViewReuseIdentifier: T.reuseID)
+    }
+    
+    public func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: T.reuseID, for: indexPath) as? T else {
+            fatalError("fatalError: Could not dequeue cell with identifier: \(T.reuseID) for cell at \(indexPath)")
+        }
+        return cell
     }
     
     public func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T {
