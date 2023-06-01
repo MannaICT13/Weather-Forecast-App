@@ -42,10 +42,17 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.firstFiveDays.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ForecastCell.deque(for: tableView, at: indexPath)
+            let (day, maxTemp, minTemp) = viewModel.firstFiveDays[indexPath.row]
+            let temparature = "\(minTemp)°C/\(maxTemp)°C"
+
+            let model = ForecastModel(temparature: temparature, dayName: day, imageStr: "cloudy2")
+            cell.model = model
+
         return cell
     }
 }

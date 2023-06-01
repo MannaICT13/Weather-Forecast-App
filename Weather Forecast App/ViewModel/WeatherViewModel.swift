@@ -46,7 +46,6 @@ class WeatherViewModel {
         return output
     }
     
-    
     private var weatherInfo: String {
         return weatherResponse.first?.weather?.first?.main ?? ""
     }
@@ -54,6 +53,52 @@ class WeatherViewModel {
     var model: CustomViewModel? {
         let model = CustomViewModel(title: "Dhaka", foreCastImageName: imageStr, tempareture: temparature, weatherInfo: weatherInfo)
         return model
+    }
+    
+    var firstFiveDays: [(String, Double, Double)] {
+        var uniqueDates: Set<String> = []
+        var firstFiveDays: [(String, Double, Double)] = []
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        for listItem in weatherResponse {
+            let temperature = listItem.main?.temp ?? .zero
+            let tempMax = listItem.main?.tempMax ?? .zero
+            let tempMin = listItem.main?.tempMin ?? .zero
+            let dateString = listItem.dtTxt
+            
+            guard let date = dateFormatter.date(from: dateString ?? "") else {
+                continue
+            }
+            
+            let dayFormatter = DateFormatter()
+            dayFormatter.dateFormat = "yyyy-MM-dd"
+            
+            let dayNameFormatter = DateFormatter()
+            dayNameFormatter.dateFormat = "EEEE"
+            
+            let currentDate = Date()
+            let key = dayFormatter.string(from: date)
+            var day = dayNameFormatter.string(from: date)
+            
+            if uniqueDates.contains(key) {
+                continue
+            }
+            
+            uniqueDates.insert(key)
+            
+            if Calendar.current.isDateInToday(date) {
+                day = "Today"
+            }
+            
+            firstFiveDays.append((day, tempMax, tempMin))
+            
+            if firstFiveDays.count == 5 {
+                break
+            }
+        }
+        return firstFiveDays
     }
     
     private func updateWeatherIcon(id: Int) -> String {
