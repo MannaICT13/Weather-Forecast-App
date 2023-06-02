@@ -56,6 +56,10 @@ class WeatherViewModel {
         return weatherResponse.first?.weather?.first?.main ?? ""
     }
     
+    var weatherCondition: WeatherCondition {
+        return updateWeatherCondition(id: id)
+    }
+    
     var model: CustomViewModel? {
         let model = CustomViewModel(title: "Dhaka", foreCastImageName: imageStr, tempareture: temparature, weatherInfo: weatherInfo)
         return model
@@ -124,6 +128,22 @@ class WeatherViewModel {
         case 904 : return "sunny"
         default :
             return "dunno"
+        }
+    }
+    
+    private func updateWeatherCondition(id: Int) -> WeatherCondition {
+        switch(id) {
+        case 0...300 : return .sunny
+        case 301...700 : return .rainy
+        case 701...771 : return .cloudy
+        case 772...799 : return .rainy
+        case 800 : return .sunny
+        case 801...804 : return .cloudy
+        case 900...903, 905...1000 : return .rainy
+        case 903 : return .rainy
+        case 904 : return .sunny
+        default :
+            return .sunny
         }
     }
     

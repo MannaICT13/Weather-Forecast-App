@@ -20,15 +20,13 @@ class WeatherViewController: UIViewController {
     }
     
     let viewModel = WeatherViewModel()
-    let weatherColor = WeatherCondition.sunny
+   // let weatherColor = WeatherCondition.sunny
     let locationManager = LocationManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.startUpdatingLocation()
         updateUserCurrentLocation()
-        self.view.backgroundColor = setBackgroundBasedOnWeather(weather: weatherColor)
-        self.navigationController?.navigationBar.barTintColor = setBackgroundBasedOnWeather(weather: weatherColor)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +117,9 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView() as CustomHeaderView
-        headerView.tintColor = setBackgroundBasedOnWeather(weather: weatherColor)
+        headerView.tintColor = setBackgroundBasedOnWeather(weather: viewModel.weatherCondition)
+        view.backgroundColor = setBackgroundBasedOnWeather(weather: viewModel.weatherCondition)
+        navigationController?.navigationBar.barTintColor = setBackgroundBasedOnWeather(weather: viewModel.weatherCondition)
         headerView.model = viewModel.model
         headerView.callback.didTappedMap = {[weak self] in
             let locationVC = LocationViewController.instantiate()
