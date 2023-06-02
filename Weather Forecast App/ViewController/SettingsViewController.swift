@@ -10,6 +10,11 @@ import UIKit
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let tableView = UITableView()
     private let viewMModel = SettingsViewModel()
+    private let darkModeKey = Constants.shared.darkModeKey
+    private var isDarkModelEnabled: Bool {
+        get { return UserDefaults.standard.bool(forKey: darkModeKey) }
+        set { UserDefaults.standard.set(newValue, forKey: darkModeKey) }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +25,26 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.isScrollEnabled = false
         view.addSubview(tableView)
     }
+    
+    func enableDarkMode() {
+         UIApplication.shared.windows.forEach { window in
+             if #available(iOS 13.0, *) {
+                 window.overrideUserInterfaceStyle = .dark
+             } else {
+                 // Fallback on earlier versions
+             }
+         }
+     }
+     
+     func disableDarkMode() {
+         UIApplication.shared.windows.forEach { window in
+             if #available(iOS 13.0, *) {
+                 window.overrideUserInterfaceStyle = .light
+             } else {
+                 // Fallback on earlier versions
+             }
+         }
+     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewMModel.sections.count
@@ -44,6 +69,20 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let cellType = viewMModel.sections[indexPath.section][indexPath.row]
+        switch cellType {
+        case .celsius:
+            break
+        case .fahrenheit:
+             break
+        case .darkMode:
+            isDarkModelEnabled.toggle()
+            isDarkModelEnabled ? enableDarkMode() : disableDarkMode()
+        case .currentLocation:
+            break
+        case .notificaation:
+            break
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

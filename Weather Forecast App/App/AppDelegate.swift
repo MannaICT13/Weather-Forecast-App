@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         LocationManager.shared.checkLocationAuthorization()
+        UserDefaults.standard.removeObject(forKey: Constants.shared.darkModeKey)
+
         // Override point for customization after application launch.
         return true
     }

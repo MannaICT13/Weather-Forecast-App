@@ -15,4 +15,5 @@ class Constants {
     }
     let locationKey = "0d0c15cd1f4d893cca83a6b0061bbccb"
     let units = "metric"
+    let darkModeKey = "isDarkModelEnabled"
 }
