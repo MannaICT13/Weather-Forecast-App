@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SettingsViewController: UIViewController {
     private let tableView = UITableView()
     private let viewMModel = SettingsViewModel()
     private let darkModeKey = Constants.shared.darkModeKey
@@ -38,30 +38,32 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
     func enableDarkMode() {
-         UIApplication.shared.windows.forEach { window in
-             if #available(iOS 13.0, *) {
-                 window.overrideUserInterfaceStyle = .dark
-             } else {
-                 // Fallback on earlier versions
-             }
-         }
-     }
-     
-     func disableDarkMode() {
-         UIApplication.shared.windows.forEach { window in
-             if #available(iOS 13.0, *) {
-                 window.overrideUserInterfaceStyle = .light
-             } else {
-                 // Fallback on earlier versions
-             }
-         }
-     }
+        UIApplication.shared.windows.forEach { window in
+            if #available(iOS 13.0, *) {
+                window.overrideUserInterfaceStyle = .dark
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+    }
     
+    func disableDarkMode() {
+        UIApplication.shared.windows.forEach { window in
+            if #available(iOS 13.0, *) {
+                window.overrideUserInterfaceStyle = .light
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+    }
+}
+
+extension SettingsViewController:  UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewMModel.sections.count
     }
@@ -115,12 +117,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-         if section == 0 { return "Tempareture Units"
-         } else if section == 1 { return "Mode"
-         } else if section == 2 { return "Others"
-         }
-         return nil
-     }
+        if section == 0 { return "Tempareture Units"
+        } else if section == 1 { return "Mode"
+        } else if section == 2 { return "Others"
+        }
+        return nil
+    }
 }
 
 extension SettingsViewController: LocationViewControllerDelegate {
