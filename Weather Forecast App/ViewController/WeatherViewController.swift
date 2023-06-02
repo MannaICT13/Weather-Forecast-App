@@ -14,16 +14,41 @@ class WeatherViewController: UIViewController {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.registerNibHeaderFooter(CustomHeaderView.self)
+            tableView.registerNibCell(ForecastCell.self)
         }
     }
     
     let viewModel = WeatherViewModel()
+    let weatherColor = WeatherCondition.sunny
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = setBackgroundBasedOnWeather(weather: weatherColor)
+        self.navigationController?.navigationBar.barTintColor = setBackgroundBasedOnWeather(weather: weatherColor)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchWeatherInfo()
+        viewModel.callback.didSuccess = {[weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        viewModel.callback.didFailure = {[weak self] error in
+            print(error)
+        }
+    }
+    func setBackgroundBasedOnWeather(weather: WeatherCondition ) -> UIColor {
+        let backgroundColor: UIColor
+        
+        switch weather {
+        case .sunny:
+            backgroundColor = .sunnyBackgroundColor
+        case .rainy:
+            backgroundColor = .rainyBackgroundColor
+        case .cloudy:
+            backgroundColor = .cloudyBackgroundColor
+        }
+        return backgroundColor
     }
 }
 
@@ -34,16 +59,29 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.firstFiveDays.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = ForecastCell.deque(for: tableView, at: indexPath)
+        let (day,icon, maxTemp, minTemp) = viewModel.firstFiveDays[indexPath.row]
+        let min = String(format: "%.2f", minTemp)
+        let max = String(format: "%.2f", maxTemp)
+        
+        let temparature = "\(min)°C / \(max)°C"
+        
+        let model = ForecastModel(temparature: temparature, dayName: day, imageStr: icon)
+        cell.model = model
+        
+        return cell
     }
 }
 // MARK: - TableView  Delegate
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView() as CustomHeaderView
+        headerView.tintColor = setBackgroundBasedOnWeather(weather: weatherColor)
+        headerView.model = viewModel.model
         headerView.callback.didTappedMap = {[weak self] in
             let locationVC = LocationViewController.instantiate()
             locationVC.delegate = self
@@ -57,19 +95,19 @@ extension WeatherViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 56.0
+        return 226.0
     }
 }
 
 extension WeatherViewController: LocationViewControllerDelegate {
     func getCoordinate(latitude: Double?, longitude: Double?) {
         if let latitude = latitude, let longitude = longitude {
-            viewModel.latitude = "\(latitude)"
-            viewModel.longitude = "\(longitude)"
+            viewModel.latitude = latitude
+            viewModel.longitude = longitude
         } else {
             // here current location
-            viewModel.latitude = "22.457331"
-            viewModel.longitude = "-0.127758"
+            viewModel.latitude = 22.457331
+            viewModel.longitude = -0.127758
         }
     }
 }

@@ -16,8 +16,8 @@ private struct WeatherRoute: APIRouteable {
     var parameters: Parameter?
     
     struct Parameter: Codable {
-        let latitude: String
-        let longitude: String
+        let latitude: Double
+        let longitude: Double
         let appid: String
         let units: String
         
@@ -35,7 +35,7 @@ private struct WeatherRoute: APIRouteable {
 }
 
 enum WeatherAPIClient: GenericAPIClient {
-    static func fetchWeatherInfo(latitude: String, longitude: String, appid: String, units: String, completion: @escaping(Result<NetworkResponse<[WeatherResponseList]>, AFError>) -> Void) {
+    static func fetchWeatherInfo(latitude: Double, longitude: Double, appid: String, units: String, completion: @escaping(Result<NetworkResponse<[WeatherResponse]>, AFError>) -> Void) {
         let parameter = WeatherRoute.Parameter(latitude: latitude, longitude: longitude, appid: appid, units: units)
         let route = WeatherRoute(parameters: parameter)
         startRequest(with: route, completion: completion)
