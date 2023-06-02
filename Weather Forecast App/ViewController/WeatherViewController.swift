@@ -25,6 +25,8 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.startUpdatingLocation()
+        updateUserCurrentLocation()
         self.view.backgroundColor = setBackgroundBasedOnWeather(weather: weatherColor)
         self.navigationController?.navigationBar.barTintColor = setBackgroundBasedOnWeather(weather: weatherColor)
     }
@@ -37,15 +39,6 @@ class WeatherViewController: UIViewController {
         
         viewModel.callback.didFailure = {[weak self] error in
             print(error)
-        }
-        locationManager.startUpdatingLocation()
-        
-        if let lastLocation = locationManager.lastKnownLocation {
-            let latitude = lastLocation.coordinate.latitude
-            let longitude = lastLocation.coordinate.longitude
-            print(" Manna - Latitude: \(latitude), Longitude: \(longitude)")
-        } else {
-            print("Manna - Location not available")
         }
     }
     
@@ -83,6 +76,18 @@ class WeatherViewController: UIViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func updateUserCurrentLocation() {
+        if let lastLocation = locationManager.lastKnownLocation {
+            let latitude = lastLocation.coordinate.latitude
+            let longitude = lastLocation.coordinate.longitude
+            viewModel.latitude = latitude
+            viewModel.longitude = longitude
+            print(" Manna - Latitude: \(latitude), Longitude: \(longitude)")
+        } else {
+            print("Location not available")
+        }
     }
 }
 
@@ -139,9 +144,9 @@ extension WeatherViewController: LocationViewControllerDelegate {
             viewModel.latitude = latitude
             viewModel.longitude = longitude
         } else {
-            // here current location
-            viewModel.latitude = 22.457331
-            viewModel.longitude = -0.127758
+            // Location selction error
+//            viewModel.latitude = 22.457331
+//            viewModel.longitude = -0.127758
         }
     }
 }

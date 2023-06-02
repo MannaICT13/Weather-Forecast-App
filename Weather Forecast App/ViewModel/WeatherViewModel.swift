@@ -22,11 +22,11 @@ extension WeatherViewModel {
 }
 
 class WeatherViewModel {
-    
     var latitude: Double = .zero
     var longitude: Double = .zero
-    let appid: String = "0d0c15cd1f4d893cca83a6b0061bbccb"
-    let units: String = "metric"
+    
+    let appid: String = Constants.shared.locationKey
+    let units: String = Constants.shared.units
     
     let callback = Callback()
     
