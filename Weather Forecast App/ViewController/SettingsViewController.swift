@@ -11,9 +11,18 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     private let tableView = UITableView()
     private let viewMModel = SettingsViewModel()
     private let darkModeKey = Constants.shared.darkModeKey
+    private let celsiusKey = Constants.shared.celsiusKey
+    private let fehrenheitKey = Constants.shared.fahrenheitKey
+    private let userDefaults = UserDefaultsManager.shared
+    
     private var isDarkModelEnabled: Bool {
-        get { return UserDefaults.standard.bool(forKey: darkModeKey) }
-        set { UserDefaults.standard.set(newValue, forKey: darkModeKey) }
+        get {
+            if let value = userDefaults.value(forKey: darkModeKey ) as? Bool {
+                return value
+            }
+            return false
+        }
+        set { userDefaults.set(value: newValue, forKey: darkModeKey) }
     }
     
     override func viewDidLoad() {
@@ -72,9 +81,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cellType = viewMModel.sections[indexPath.section][indexPath.row]
         switch cellType {
         case .celsius:
-            break
+            userDefaults.set(value: true, forKey: celsiusKey)
+            userDefaults.set(value: false, forKey: fehrenheitKey)
         case .fahrenheit:
-             break
+            userDefaults.set(value: false, forKey: celsiusKey)
+            userDefaults.set(value: true, forKey: fehrenheitKey)
         case .darkMode:
             isDarkModelEnabled.toggle()
             isDarkModelEnabled ? enableDarkMode() : disableDarkMode()

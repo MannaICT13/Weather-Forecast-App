@@ -45,6 +45,17 @@ class WeatherViewController: UIViewController {
             self?.stopLoading()
             print(error)
         }
+        
+        if let isCelsius = UserDefaultsManager.shared.value(forKey: Constants.shared.celsiusKey) as? Bool {
+            if isCelsius {
+                print("Manna..............................C")
+            }
+        }
+        if let isFehrenheit = UserDefaultsManager.shared.value(forKey: Constants.shared.fahrenheitKey) as? Bool {
+            if isFehrenheit {
+                print("Munna...........................F")
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
