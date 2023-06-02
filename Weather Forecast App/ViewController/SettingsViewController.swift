@@ -13,6 +13,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     private let darkModeKey = Constants.shared.darkModeKey
     private let celsiusKey = Constants.shared.celsiusKey
     private let fehrenheitKey = Constants.shared.fahrenheitKey
+    private let latitudeKey = Constants.shared.latitude
+    private let longitudeKey = Constants.shared.longitude
     private let userDefaults = UserDefaultsManager.shared
     
     private var isDarkModelEnabled: Bool {
@@ -33,6 +35,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.isScrollEnabled = false
         view.addSubview(tableView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     func enableDarkMode() {
@@ -70,8 +77,17 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         switch cellType {
         default:
             cell.textLabel?.text = cellType.title
-            cell.detailTextLabel?.text = cellType.detail
-            
+            if cellType  == .defaultLocation {
+                if let lat = userDefaults.value(forKey: latitudeKey) as? Double,
+                   let lon = userDefaults.value(forKey: longitudeKey) as? Double {
+                    let latitude = String(format: "%.1f", lat)
+                    let longitude = String(format: "%.1f", lon)
+                    let location =  "lat:\(latitude) long: \(longitude)"
+                    cell.detailTextLabel?.text = location
+                }
+            } else {
+                cell.detailTextLabel?.text = cellType.detail
+            }
         }
         return cell
     }
@@ -89,8 +105,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         case .darkMode:
             isDarkModelEnabled.toggle()
             isDarkModelEnabled ? enableDarkMode() : disableDarkMode()
-        case .currentLocation:
-            break
+        case .defaultLocation:
+            let locationVC = LocationViewController.instantiate()
+            locationVC.delegate = self
+            navigationController?.pushViewController(locationVC, animated: true)
         case .notificaation:
             break
         }
@@ -103,4 +121,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
          }
          return nil
      }
+}
+
+extension SettingsViewController: LocationViewControllerDelegate {
+    func getCoordinate(latitude: Double?, longitude: Double?) {
+        if let latitude = latitude, let longitude = longitude {
+            userDefaults.set(value: latitude, forKey: self.latitudeKey)
+            userDefaults.set(value: longitude, forKey: self.longitudeKey)
+        }
+    }
 }

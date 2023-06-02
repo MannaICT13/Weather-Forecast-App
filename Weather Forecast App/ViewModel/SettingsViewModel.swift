@@ -9,6 +9,9 @@ import Foundation
 
 class SettingsViewModel {
     
+    var defaultLatitude = Double()
+    var defaultLongitude = Double()
+    
     var sections: [[Settings]] {
         var firstSection = [Settings]()
         firstSection = [.celsius, .fahrenheit]
@@ -17,7 +20,7 @@ class SettingsViewModel {
         secondSection = [.darkMode]
         
         var thirdSection = [Settings]()
-        thirdSection = [.currentLocation, .notificaation]
+        thirdSection = [.defaultLocation, .notificaation]
         
         return [firstSection, secondSection, thirdSection]
     }
@@ -28,7 +31,7 @@ enum Settings: CaseIterable {
     case celsius
     case fahrenheit
     case darkMode
-    case currentLocation
+    case defaultLocation
     case notificaation
     
     var title: String {
@@ -36,7 +39,7 @@ enum Settings: CaseIterable {
         case .celsius: return "Celsius"
         case .fahrenheit: return "Fahrenheit"
         case .darkMode: return "Dark Mode"
-        case .currentLocation: return "Current Location"
+        case .defaultLocation: return "Default Location"
         case .notificaation: return "Get Notify"
         }
     }
