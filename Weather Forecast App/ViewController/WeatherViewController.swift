@@ -84,7 +84,7 @@ class WeatherViewController: UIViewController {
             let longitude = lastLocation.coordinate.longitude
             viewModel.latitude = latitude
             viewModel.longitude = longitude
-            print(" Manna - Latitude: \(latitude), Longitude: \(longitude)")
+            print("Latitude: \(latitude), Longitude: \(longitude)")
         } else {
             print("Location not available")
         }
@@ -143,10 +143,6 @@ extension WeatherViewController: LocationViewControllerDelegate {
         if let latitude = latitude, let longitude = longitude {
             viewModel.latitude = latitude
             viewModel.longitude = longitude
-        } else {
-            // Location selction error
-//            viewModel.latitude = 22.457331
-//            viewModel.longitude = -0.127758
         }
     }
 }
