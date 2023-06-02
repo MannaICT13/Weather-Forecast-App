@@ -17,6 +17,9 @@ class WeatherViewController: UIViewController {
             tableView.registerNibCell(ForecastCell.self)
         }
     }
+    
+    let refreshControl = UIRefreshControl()
+    
     let viewModel = WeatherViewModel()
     let locationManager = LocationManager.shared
     let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -25,6 +28,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(blurEffectView)
+        tableView.refreshControl = refreshControl
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.contentView.addSubview(activityIndicator)
@@ -33,6 +37,8 @@ class WeatherViewController: UIViewController {
         startLoading()
         locationManager.startUpdatingLocation()
         updateUserCurrentLocation()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,9 +46,11 @@ class WeatherViewController: UIViewController {
         viewModel.callback.didSuccess = {[weak self] in
             self?.stopLoading()
             self?.tableView.reloadData()
+            self?.endRefreshing()
         }
         viewModel.callback.didFailure = {[weak self] error in
             self?.stopLoading()
+            self?.endRefreshing()
             print(error)
         }
         
@@ -61,6 +69,17 @@ class WeatherViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.stopUpdatingLocation()
+    }
+    
+    @objc func refreshData() {
+        updateUserCurrentLocation()
+        viewModel.fetchWeatherInfo()
+    }
+    
+    private func endRefreshing() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     
     func startLoading() {
