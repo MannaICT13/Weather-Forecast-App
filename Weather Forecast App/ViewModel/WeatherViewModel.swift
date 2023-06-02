@@ -37,6 +37,7 @@ class WeatherViewModel {
     let callback = Callback()
     
     var weatherResponse: [WeatherResponse] = []
+    var cityResponse: CityResponse?
     var temperatureUnit: TemperatureUnits  = .celsius
     
     private var id: Int {
@@ -70,12 +71,17 @@ class WeatherViewModel {
         return weatherResponse.first?.weather?.first?.main ?? ""
     }
     
+    var city: String {
+        guard let cityName = cityResponse?.name else { return "Not Found" }
+        return cityName
+    }
+    
     var weatherCondition: WeatherCondition {
         return updateWeatherCondition(id: id)
     }
     
     var model: CustomViewModel? {
-        let model = CustomViewModel(title: "Dhaka", foreCastImageName: imageStr, tempareture: temparature, weatherInfo: weatherInfo)
+        let model = CustomViewModel(title: city, foreCastImageName: imageStr, tempareture: temparature, weatherInfo: weatherInfo)
         return model
     }
     
@@ -177,6 +183,7 @@ class WeatherViewModel {
             case .success(let response):
                 if response.list.count > .zero {
                     self?.weatherResponse = response.list
+                    self?.cityResponse = response.city
                     self?.callback.didSuccess()
                     print(response.list)
                 }
