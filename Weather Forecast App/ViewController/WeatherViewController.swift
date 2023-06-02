@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import Foundation
 
 class WeatherViewController: UIViewController {
-    
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -17,29 +17,55 @@ class WeatherViewController: UIViewController {
             tableView.registerNibCell(ForecastCell.self)
         }
     }
-    
     let viewModel = WeatherViewModel()
-    let weatherColor = WeatherCondition.sunny
+    let locationManager = LocationManager.shared
+    let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = setBackgroundBasedOnWeather(weather: weatherColor)
-        self.navigationController?.navigationBar.barTintColor = setBackgroundBasedOnWeather(weather: weatherColor)
+        view.addSubview(blurEffectView)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.contentView.addSubview(activityIndicator)
+        activityIndicator.center = blurEffectView.contentView.center
+        activityIndicator.hidesWhenStopped = true
+        startLoading()
+        locationManager.startUpdatingLocation()
+        updateUserCurrentLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchWeatherInfo()
         viewModel.callback.didSuccess = {[weak self] in
+            self?.stopLoading()
             self?.tableView.reloadData()
         }
-        
         viewModel.callback.didFailure = {[weak self] error in
+            self?.stopLoading()
             print(error)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func startLoading() {
+        blurEffectView.isHidden = false
+        activityIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func stopLoading() {
+        blurEffectView.isHidden = true
+        activityIndicator.stopAnimating()
+        view.isUserInteractionEnabled = true
+    }
+    
     func setBackgroundBasedOnWeather(weather: WeatherCondition ) -> UIColor {
         let backgroundColor: UIColor
-        
         switch weather {
         case .sunny:
             backgroundColor = .sunnyBackgroundColor
@@ -49,6 +75,35 @@ class WeatherViewController: UIViewController {
             backgroundColor = .cloudyBackgroundColor
         }
         return backgroundColor
+    }
+    
+    func showLocationAccessAlert() {
+        let alert = UIAlertController(title: "Location Access", message: "Please grant location access to use this feature.", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl)
+            }
+        }
+        alert.addAction(settingsAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func updateUserCurrentLocation() {
+        if let lastLocation = locationManager.lastKnownLocation {
+            let latitude = lastLocation.coordinate.latitude
+            let longitude = lastLocation.coordinate.longitude
+            viewModel.latitude = latitude
+            viewModel.longitude = longitude
+            print("Latitude: \(latitude), Longitude: \(longitude)")
+        } else {
+            print("Location not available")
+        }
     }
 }
 
@@ -80,7 +135,9 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView() as CustomHeaderView
-        headerView.tintColor = setBackgroundBasedOnWeather(weather: weatherColor)
+        headerView.tintColor = setBackgroundBasedOnWeather(weather: viewModel.weatherCondition)
+        view.backgroundColor = setBackgroundBasedOnWeather(weather: viewModel.weatherCondition)
+        navigationController?.navigationBar.barTintColor = setBackgroundBasedOnWeather(weather: viewModel.weatherCondition)
         headerView.model = viewModel.model
         headerView.callback.didTappedMap = {[weak self] in
             let locationVC = LocationViewController.instantiate()
@@ -104,10 +161,6 @@ extension WeatherViewController: LocationViewControllerDelegate {
         if let latitude = latitude, let longitude = longitude {
             viewModel.latitude = latitude
             viewModel.longitude = longitude
-        } else {
-            // here current location
-            viewModel.latitude = 22.457331
-            viewModel.longitude = -0.127758
         }
     }
 }

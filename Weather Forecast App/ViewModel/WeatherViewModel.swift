@@ -22,11 +22,11 @@ extension WeatherViewModel {
 }
 
 class WeatherViewModel {
-    
     var latitude: Double = .zero
     var longitude: Double = .zero
-    let appid: String = "0d0c15cd1f4d893cca83a6b0061bbccb"
-    let units: String = "metric"
+    
+    let appid: String = Constants.shared.locationKey
+    let units: String = Constants.shared.units
     
     let callback = Callback()
     
@@ -54,6 +54,10 @@ class WeatherViewModel {
     
     private var weatherInfo: String {
         return weatherResponse.first?.weather?.first?.main ?? ""
+    }
+    
+    var weatherCondition: WeatherCondition {
+        return updateWeatherCondition(id: id)
     }
     
     var model: CustomViewModel? {
@@ -124,6 +128,22 @@ class WeatherViewModel {
         case 904 : return "sunny"
         default :
             return "dunno"
+        }
+    }
+    
+    private func updateWeatherCondition(id: Int) -> WeatherCondition {
+        switch(id) {
+        case 0...300 : return .sunny
+        case 301...700 : return .rainy
+        case 701...771 : return .cloudy
+        case 772...799 : return .rainy
+        case 800 : return .sunny
+        case 801...804 : return .cloudy
+        case 900...903, 905...1000 : return .rainy
+        case 903 : return .rainy
+        case 904 : return .sunny
+        default :
+            return .sunny
         }
     }
     

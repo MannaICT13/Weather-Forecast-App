@@ -7,5 +7,7 @@
         <key>NSAllowsArbitraryLoads</key>
         <true/>
     </dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Please allow location permission for current weather update</string>
 </dict>
 </plist>
