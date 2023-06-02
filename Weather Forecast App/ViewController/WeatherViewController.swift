@@ -146,7 +146,8 @@ extension WeatherViewController: UITableViewDelegate {
         }
         
         headerView.callback.didTappedSetting = {[weak self] in
-            //navigate to setting vc
+            let settingsVC = SettingsViewController()
+            self?.navigationController?.pushViewController(settingsVC, animated: true)
         }
         return headerView
     }
