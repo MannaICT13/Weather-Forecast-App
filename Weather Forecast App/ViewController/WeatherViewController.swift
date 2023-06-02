@@ -19,8 +19,12 @@ class WeatherViewController: UIViewController {
     }
     
     let viewModel = WeatherViewModel()
+    let weatherColor = WeatherCondition.sunny
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = setBackgroundBasedOnWeather(weather: weatherColor)
+        self.navigationController?.navigationBar.barTintColor = setBackgroundBasedOnWeather(weather: weatherColor)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +36,19 @@ class WeatherViewController: UIViewController {
         viewModel.callback.didFailure = {[weak self] error in
             print(error)
         }
+    }
+    func setBackgroundBasedOnWeather(weather: WeatherCondition ) -> UIColor {
+        let backgroundColor: UIColor
+        
+        switch weather {
+        case .sunny:
+            backgroundColor = .sunnyBackgroundColor
+        case .rainy:
+            backgroundColor = .rainyBackgroundColor
+        case .cloudy:
+            backgroundColor = .cloudyBackgroundColor
+        }
+        return backgroundColor
     }
 }
 
@@ -51,7 +68,7 @@ extension WeatherViewController: UITableViewDataSource {
         let min = String(format: "%.2f", minTemp)
         let max = String(format: "%.2f", maxTemp)
         
-        let temparature = "\(min)°C / \(maxTemp)°C"
+        let temparature = "\(min)°C / \(max)°C"
         
         let model = ForecastModel(temparature: temparature, dayName: day, imageStr: icon)
         cell.model = model
@@ -63,7 +80,7 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView() as CustomHeaderView
-        
+        headerView.tintColor = setBackgroundBasedOnWeather(weather: weatherColor)
         headerView.model = viewModel.model
         headerView.callback.didTappedMap = {[weak self] in
             let locationVC = LocationViewController.instantiate()

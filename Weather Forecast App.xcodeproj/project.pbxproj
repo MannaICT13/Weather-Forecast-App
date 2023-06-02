@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A18A52E2A28FD7200398CAB /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18A52C2A28FD7200398CAB /* ForecastCell.swift */; };
 		2A18A52F2A28FD7200398CAB /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A18A52D2A28FD7200398CAB /* ForecastCell.xib */; };
+		2A6E5E762A29BE1F00A64DD9 /* UIColor+Aadditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E5E752A29BE1F00A64DD9 /* UIColor+Aadditions.swift */; };
 		2A87DC8F2A2797DC00CC93F0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */; };
 		2A87DC912A2799B400CC93F0 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */; };
 		2A87DC932A2799DD00CC93F0 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		2A18A52C2A28FD7200398CAB /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		2A18A52D2A28FD7200398CAB /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
+		2A6E5E752A29BE1F00A64DD9 /* UIColor+Aadditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Aadditions.swift"; sourceTree = "<group>"; };
 		2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */,
+				2A6E5E752A29BE1F00A64DD9 /* UIColor+Aadditions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			files = (
 				2AAF16442A266D240082E2B9 /* NetworkResponse.swift in Sources */,
 				2AAF16502A266F910082E2B9 /* WeatherViewModel.swift in Sources */,
+				2A6E5E762A29BE1F00A64DD9 /* UIColor+Aadditions.swift in Sources */,
 				2A87DC982A27BCBB00CC93F0 /* SharedProtocols.swift in Sources */,
 				2AAF16422A266CE50082E2B9 /* Environment.swift in Sources */,
 				2A18A52E2A28FD7200398CAB /* ForecastCell.swift in Sources */,
