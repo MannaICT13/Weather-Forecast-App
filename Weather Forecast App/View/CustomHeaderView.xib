@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,6 +26,7 @@
                                         <constraint firstAttribute="height" constant="24" id="isv-Yw-abx"/>
                                         <constraint firstAttribute="width" constant="24" id="tnb-fI-5eI"/>
                                     </constraints>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="pin"/>
                                     <connections>
@@ -45,6 +45,7 @@
                                         <constraint firstAttribute="width" constant="24" id="Hpl-Bb-9XW"/>
                                         <constraint firstAttribute="height" constant="24" id="cDF-2G-8Fa"/>
                                     </constraints>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="settings"/>
                                     <connections>
@@ -52,7 +53,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="64" id="5CO-y3-HXp"/>
                                 <constraint firstAttribute="trailing" secondItem="RnW-8a-8Gq" secondAttribute="trailing" constant="20" id="9Ah-Vx-mZv"/>
@@ -75,7 +76,7 @@
                                     </constraints>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="Wca-75-11N"/>
                                 <constraint firstItem="8pr-bv-Bks" firstAttribute="centerY" secondItem="WqO-ZQ-xm6" secondAttribute="centerY" id="dJ1-24-9Ja"/>
@@ -88,17 +89,17 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abz-7t-t1Q">
                                     <rect key="frame" x="160.66666666666666" y="17" width="53.666666666666657" height="26.333333333333329"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunny" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOo-kL-yU9">
                                     <rect key="frame" x="218.33333333333334" y="28.999999999999996" width="36" height="14.333333333333332"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Abz-7t-t1Q" firstAttribute="centerY" secondItem="D2n-sd-xJy" secondAttribute="centerY" id="DIC-nO-gM5"/>
                                 <constraint firstItem="fOo-kL-yU9" firstAttribute="bottom" secondItem="Abz-7t-t1Q" secondAttribute="bottom" id="Ybb-Bn-dKD"/>
@@ -109,6 +110,7 @@
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="sme-ib-nCE" firstAttribute="leading" secondItem="r8Z-Qf-sHB" secondAttribute="leading" id="1FM-mE-wvH"/>
                         <constraint firstItem="WqO-ZQ-xm6" firstAttribute="trailing" secondItem="sme-ib-nCE" secondAttribute="trailing" id="7gG-DR-zP9"/>
@@ -123,6 +125,8 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="3uz-o9-bp2"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="r8Z-Qf-sHB" firstAttribute="trailing" secondItem="3uz-o9-bp2" secondAttribute="trailing" id="4rb-dp-1jd"/>
                 <constraint firstItem="r8Z-Qf-sHB" firstAttribute="top" secondItem="XUg-zg-nNv" secondAttribute="top" id="AFk-Vb-GuZ"/>
@@ -147,8 +151,5 @@
         <image name="cloudy2" width="128" height="128"/>
         <image name="pin" width="512" height="512"/>
         <image name="settings" width="512" height="512"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
