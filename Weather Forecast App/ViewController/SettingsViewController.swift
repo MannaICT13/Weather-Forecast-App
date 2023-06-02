@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class SettingsViewController: UIViewController {
     private let tableView = UITableView()
@@ -61,8 +62,50 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+    
+    private func handleNotification() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                self.sendNotification()
+                print("Notification permission is enabled")
+            } else {
+                self.getNotificationPermission()
+                print("Notification permission is not enabled")
+            }
+        }
+        UNUserNotificationCenter.current().delegate = self
+    }
+    
+    private func getNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if granted {
+                print("Notification permission granted")
+            } else {
+                print("Notification permission denied")
+            }
+        }
+    }
+    
+   private func sendNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Notification Title"
+        content.body = "Notification Body"
+        content.sound = UNNotificationSound.default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            } else {
+                print("Notification scheduled successfully")
+            }
+        }
+    }
 }
 
+// MARK: - TableView Delegate & DataSource Methods
 extension SettingsViewController:  UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewMModel.sections.count
@@ -112,7 +155,7 @@ extension SettingsViewController:  UITableViewDataSource, UITableViewDelegate {
             locationVC.delegate = self
             navigationController?.pushViewController(locationVC, animated: true)
         case .notificaation:
-            break
+            handleNotification()
         }
     }
     
@@ -131,5 +174,11 @@ extension SettingsViewController: LocationViewControllerDelegate {
             userDefaults.set(value: latitude, forKey: self.latitudeKey)
             userDefaults.set(value: longitude, forKey: self.longitudeKey)
         }
+    }
+}
+
+extension SettingsViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.badge,.sound])
     }
 }
