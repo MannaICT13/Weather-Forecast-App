@@ -12,6 +12,9 @@
 		2A6E5E762A29BE1F00A64DD9 /* UIColor+Aadditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E5E752A29BE1F00A64DD9 /* UIColor+Aadditions.swift */; };
 		2A6E5E792A29E61D00A64DD9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E5E782A29E61D00A64DD9 /* LocationManager.swift */; };
 		2A6E5E7C2A29F17A00A64DD9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E5E7B2A29F17A00A64DD9 /* Constants.swift */; };
+		2A6E5E7E2A2A112400A64DD9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E5E7D2A2A112400A64DD9 /* SettingsViewController.swift */; };
+		2A6E5E802A2A16FF00A64DD9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E5E7F2A2A16FF00A64DD9 /* SettingsViewModel.swift */; };
+		2A6E5E832A2A2A2900A64DD9 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E5E822A2A2A2900A64DD9 /* UserDefaultsManager.swift */; };
 		2A87DC8F2A2797DC00CC93F0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */; };
 		2A87DC912A2799B400CC93F0 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */; };
 		2A87DC932A2799DD00CC93F0 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */; };
@@ -38,6 +41,9 @@
 		2A6E5E752A29BE1F00A64DD9 /* UIColor+Aadditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Aadditions.swift"; sourceTree = "<group>"; };
 		2A6E5E782A29E61D00A64DD9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2A6E5E7B2A29F17A00A64DD9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2A6E5E7D2A2A112400A64DD9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2A6E5E7F2A2A16FF00A64DD9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		2A6E5E822A2A2A2900A64DD9 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		2A87DC8E2A2797DC00CC93F0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		2A87DC902A2799B400CC93F0 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		2A87DC922A2799DD00CC93F0 /* CustomHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
@@ -90,6 +96,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		2A6E5E812A2A29F300A64DD9 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				2A6E5E822A2A2A2900A64DD9 /* UserDefaultsManager.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		2A87DC8B2A2796F300CC93F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +118,7 @@
 		2A87DC8C2A27979B00CC93F0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2A6E5E812A2A29F300A64DD9 /* UserDefaults */,
 				2A6E5E7A2A29F16300A64DD9 /* Constants */,
 				2A6E5E772A29E60600A64DD9 /* Location */,
 				2A87DC8D2A2797B700CC93F0 /* Extensions */,
@@ -159,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				2AAF164F2A266F900082E2B9 /* WeatherViewModel.swift */,
+				2A6E5E7F2A2A16FF00A64DD9 /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -211,6 +227,7 @@
 			children = (
 				2AAF164C2A266EED0082E2B9 /* WeatherViewController.swift */,
 				2A87DC942A27B94000CC93F0 /* LocationViewController.swift */,
+				2A6E5E7D2A2A112400A64DD9 /* SettingsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -389,6 +406,8 @@
 				2AAF16502A266F910082E2B9 /* WeatherViewModel.swift in Sources */,
 				2A6E5E762A29BE1F00A64DD9 /* UIColor+Aadditions.swift in Sources */,
 				2A87DC982A27BCBB00CC93F0 /* SharedProtocols.swift in Sources */,
+				2A6E5E802A2A16FF00A64DD9 /* SettingsViewModel.swift in Sources */,
+				2A6E5E832A2A2A2900A64DD9 /* UserDefaultsManager.swift in Sources */,
 				2A6E5E792A29E61D00A64DD9 /* LocationManager.swift in Sources */,
 				2AAF16422A266CE50082E2B9 /* Environment.swift in Sources */,
 				2A18A52E2A28FD7200398CAB /* ForecastCell.swift in Sources */,
@@ -401,6 +420,7 @@
 				2A87DC912A2799B400CC93F0 /* CustomHeaderView.swift in Sources */,
 				2AAF16462A266D610082E2B9 /* APIClient.swift in Sources */,
 				2AAF164B2A266DE10082E2B9 /* WeatherResponse.swift in Sources */,
+				2A6E5E7E2A2A112400A64DD9 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,5 +9,14 @@
     </dict>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Please allow location permission for current weather update</string>
+    
+    <key>NSUserNotificationEnabled</key>
+    <true/>
+    <key>NSUserNotificationUsageDescription</key>
+    <string>Please allow permission for notifications.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>local-notification</string>
+    </array>
 </dict>
 </plist>

@@ -14,6 +14,11 @@ enum WeatherCondition {
     case cloudy
 }
 
+enum TemperatureUnits: String, CaseIterable {
+    case celsius = "C"
+    case fahrenheit = "F"
+}
+
 extension WeatherViewModel {
     class Callback {
         var didSuccess: () -> Void = { }
@@ -22,6 +27,7 @@ extension WeatherViewModel {
 }
 
 class WeatherViewModel {
+    
     var latitude: Double = .zero
     var longitude: Double = .zero
     
@@ -31,6 +37,7 @@ class WeatherViewModel {
     let callback = Callback()
     
     var weatherResponse: [WeatherResponse] = []
+    var temperatureUnit: TemperatureUnits  = .celsius
     
     private var id: Int {
         return weatherResponse.first?.weather?.first?.id ?? .zero
@@ -43,11 +50,18 @@ class WeatherViewModel {
     private var temparature: String {
         let temp = weatherResponse.first?.main?.temp ?? .zero
         var output: String = ""
+        var newValue: Double = .zero
+        
         if let degreeSymbol = "\u{00B0}".unicodeScalars.first {
             let degreeString = String(degreeSymbol)
-            let temperatureString = String(format: "%.1f", temp)
+            if temperatureUnit == .fahrenheit {
+                newValue = celsiusToFahrenheit(celsius: temp)
+            } else {
+                newValue = temp
+            }
+            let temperatureString = String(format: "%.1f", newValue)
             
-            output = temperatureString + degreeString + "C"
+            output = temperatureString + degreeString + temperatureUnit.rawValue
         }
         return output
     }
@@ -75,8 +89,8 @@ class WeatherViewModel {
         for listItem in weatherResponse {
             let id = listItem.weather?.first?.id ?? .zero
             let temperature = listItem.main?.temp ?? .zero
-            let tempMax = listItem.main?.tempMax ?? .zero
-            let tempMin = listItem.main?.tempMin ?? .zero
+            var tempMax = listItem.main?.tempMax ?? .zero
+            var tempMin = listItem.main?.tempMin ?? .zero
             let dateString = listItem.dtTxt
             
             guard let date = dateFormatter.date(from: dateString ?? "") else {
@@ -103,6 +117,11 @@ class WeatherViewModel {
                 day = "Today"
             }
             let icon = updateWeatherIcon(id: id)
+            
+            if temperatureUnit == .fahrenheit {
+                tempMax = celsiusToFahrenheit(celsius: tempMax)
+                tempMin = celsiusToFahrenheit(celsius: tempMin)
+            }
             
             firstFiveDays.append((day,icon, tempMax, tempMin))
             
@@ -145,6 +164,11 @@ class WeatherViewModel {
         default :
             return .sunny
         }
+    }
+    
+    private func celsiusToFahrenheit(celsius: Double) -> Double {
+        let fahrenheit = (celsius * 9/5) + 32
+        return fahrenheit
     }
     
     func fetchWeatherInfo() {

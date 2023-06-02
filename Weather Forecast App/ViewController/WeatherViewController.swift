@@ -17,6 +17,9 @@ class WeatherViewController: UIViewController {
             tableView.registerNibCell(ForecastCell.self)
         }
     }
+    
+    let refreshControl = UIRefreshControl()
+    
     let viewModel = WeatherViewModel()
     let locationManager = LocationManager.shared
     let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -25,6 +28,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(blurEffectView)
+        tableView.refreshControl = refreshControl
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.contentView.addSubview(activityIndicator)
@@ -33,6 +37,8 @@ class WeatherViewController: UIViewController {
         startLoading()
         locationManager.startUpdatingLocation()
         updateUserCurrentLocation()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,16 +46,40 @@ class WeatherViewController: UIViewController {
         viewModel.callback.didSuccess = {[weak self] in
             self?.stopLoading()
             self?.tableView.reloadData()
+            self?.endRefreshing()
         }
         viewModel.callback.didFailure = {[weak self] error in
             self?.stopLoading()
+            self?.endRefreshing()
             print(error)
+        }
+        
+        if let isCelsius = UserDefaultsManager.shared.value(forKey: Constants.shared.celsiusKey) as? Bool {
+            if isCelsius {
+                viewModel.temperatureUnit = .celsius
+            }
+        }
+        if let isFehrenheit = UserDefaultsManager.shared.value(forKey: Constants.shared.fahrenheitKey) as? Bool {
+            if isFehrenheit {
+                viewModel.temperatureUnit = .fahrenheit
+            }
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.stopUpdatingLocation()
+    }
+    
+    @objc func refreshData() {
+        updateUserCurrentLocation()
+        viewModel.fetchWeatherInfo()
+    }
+    
+    private func endRefreshing() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     
     func startLoading() {
@@ -122,8 +152,8 @@ extension WeatherViewController: UITableViewDataSource {
         let (day,icon, maxTemp, minTemp) = viewModel.firstFiveDays[indexPath.row]
         let min = String(format: "%.2f", minTemp)
         let max = String(format: "%.2f", maxTemp)
-        
-        let temparature = "\(min)°C / \(max)°C"
+        let unit = viewModel.temperatureUnit.rawValue
+        let temparature = "\(min)°\(unit) / \(max)°\(unit)"
         
         let model = ForecastModel(temparature: temparature, dayName: day, imageStr: icon)
         cell.model = model
@@ -146,7 +176,8 @@ extension WeatherViewController: UITableViewDelegate {
         }
         
         headerView.callback.didTappedSetting = {[weak self] in
-            //navigate to setting vc
+            let settingsVC = SettingsViewController()
+            self?.navigationController?.pushViewController(settingsVC, animated: true)
         }
         return headerView
     }
