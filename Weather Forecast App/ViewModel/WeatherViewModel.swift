@@ -8,6 +8,12 @@
 import Foundation
 import Alamofire
 
+enum WeatherCondition {
+    case sunny
+    case rainy
+    case cloudy
+}
+
 extension WeatherViewModel {
     class Callback {
         var didSuccess: () -> Void = { }
