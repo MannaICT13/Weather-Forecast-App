@@ -9,7 +9,6 @@ import UIKit
 import Foundation
 
 class WeatherViewController: UIViewController {
-    
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -18,13 +17,20 @@ class WeatherViewController: UIViewController {
             tableView.registerNibCell(ForecastCell.self)
         }
     }
-    
     let viewModel = WeatherViewModel()
-   // let weatherColor = WeatherCondition.sunny
     let locationManager = LocationManager.shared
+    let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(blurEffectView)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.contentView.addSubview(activityIndicator)
+        activityIndicator.center = blurEffectView.contentView.center
+        activityIndicator.hidesWhenStopped = true
+        startLoading()
         locationManager.startUpdatingLocation()
         updateUserCurrentLocation()
     }
@@ -32,10 +38,11 @@ class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchWeatherInfo()
         viewModel.callback.didSuccess = {[weak self] in
+            self?.stopLoading()
             self?.tableView.reloadData()
         }
-        
         viewModel.callback.didFailure = {[weak self] error in
+            self?.stopLoading()
             print(error)
         }
     }
@@ -45,9 +52,20 @@ class WeatherViewController: UIViewController {
         locationManager.stopUpdatingLocation()
     }
     
+    func startLoading() {
+        blurEffectView.isHidden = false
+        activityIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func stopLoading() {
+        blurEffectView.isHidden = true
+        activityIndicator.stopAnimating()
+        view.isUserInteractionEnabled = true
+    }
+    
     func setBackgroundBasedOnWeather(weather: WeatherCondition ) -> UIColor {
         let backgroundColor: UIColor
-        
         switch weather {
         case .sunny:
             backgroundColor = .sunnyBackgroundColor
