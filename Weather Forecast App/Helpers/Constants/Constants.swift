@@ -18,6 +18,7 @@ class Constants {
     let darkModeKey = "isDarkModelEnabled"
     let celsiusKey = "isCelsiusUnit"
     let fahrenheitKey = "isFahrenheitUnit"
+    let city = "city"
     let latitude = "latitude"
     let longitude = "longitude"
 }
