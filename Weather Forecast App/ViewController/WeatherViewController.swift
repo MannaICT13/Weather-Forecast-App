@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class WeatherViewController: UIViewController {
     
@@ -20,6 +21,7 @@ class WeatherViewController: UIViewController {
     
     let viewModel = WeatherViewModel()
     let weatherColor = WeatherCondition.sunny
+    let locationManager = LocationManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,22 @@ class WeatherViewController: UIViewController {
         viewModel.callback.didFailure = {[weak self] error in
             print(error)
         }
+        locationManager.startUpdatingLocation()
+        
+        if let lastLocation = locationManager.lastKnownLocation {
+            let latitude = lastLocation.coordinate.latitude
+            let longitude = lastLocation.coordinate.longitude
+            print(" Manna - Latitude: \(latitude), Longitude: \(longitude)")
+        } else {
+            print("Manna - Location not available")
+        }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.stopUpdatingLocation()
+    }
+    
     func setBackgroundBasedOnWeather(weather: WeatherCondition ) -> UIColor {
         let backgroundColor: UIColor
         
@@ -49,6 +66,23 @@ class WeatherViewController: UIViewController {
             backgroundColor = .cloudyBackgroundColor
         }
         return backgroundColor
+    }
+    
+    func showLocationAccessAlert() {
+        let alert = UIAlertController(title: "Location Access", message: "Please grant location access to use this feature.", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl)
+            }
+        }
+        alert.addAction(settingsAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
