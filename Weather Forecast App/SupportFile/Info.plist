@@ -8,8 +8,9 @@
         <true/>
     </dict>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Please allow location permission for current weather update</string>
-    
+    <string>Your app needs access to your location to provide location-based services.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Your app needs access to your location to provide location-based services even when it's running in the background.</string>
     <key>NSUserNotificationEnabled</key>
     <true/>
     <key>NSUserNotificationUsageDescription</key>

@@ -29,7 +29,8 @@ class SettingsViewModel {
     
     let callback = Callback()
     
-    var cityResponse: CityResponse?
+    private var cityResponse: CityResponse?
+    private var weatherResponse: [WeatherResponse] = []
     
     var city: String {
         guard let cityName = cityResponse?.name else { return "Not Found" }
@@ -42,6 +43,22 @@ class SettingsViewModel {
             return (lat, lon)
         }
         return (.zero, .zero)
+    }
+    
+    var weatherInfo: String {
+        return weatherResponse.first?.weather?.first?.main ?? ""
+    }
+    
+    var temperature: String {
+        let temp = weatherResponse.first?.main?.temp ?? .zero
+        var output: String = ""
+        if let degreeSymbol = "\u{00B0}".unicodeScalars.first {
+            let degreeString = String(degreeSymbol)
+            let temperatureString = String(format: "%.1f", temp)
+            
+            output = temperatureString + degreeString + "C"
+        }
+        return output
     }
     
     var sections: [[Settings]] {
@@ -61,16 +78,15 @@ class SettingsViewModel {
         WeatherAPIClient.fetchWeatherInfo(latitude: coordinate.0, longitude: coordinate.1, appid: appid, units: units) { [weak self] result in
             switch result {
             case .success(let response):
+                self?.weatherResponse = response.list
                 self?.cityResponse = response.city
                 self?.callback.didSuccess()
-                
             case .failure(let error):
                 self?.callback.didFailure(error)
             }
         }
     }
 }
-
 
 enum Settings: CaseIterable {
     case celsius

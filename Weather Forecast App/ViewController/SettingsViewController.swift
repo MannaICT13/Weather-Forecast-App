@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.fetchCity()
         viewModel.callback.didSuccess = {[weak self] in
             self?.userDefaults.set(value: self?.viewModel.city, forKey: self?.viewModel.cityKey ?? "city")
             self?.tableView.reloadData()
@@ -90,8 +91,8 @@ class SettingsViewController: UIViewController {
     
    private func sendNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Notification Title"
-        content.body = "Notification Body"
+        content.title = "Weather Information"
+        content.body = "City: \(viewModel.city), Temperature: \(viewModel.temperature) and weather condition: \(viewModel.weatherInfo)"
         content.sound = UNNotificationSound.default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
@@ -172,7 +173,6 @@ extension SettingsViewController: LocationViewControllerDelegate {
             userDefaults.set(value: latitude, forKey: self.viewModel.latitudeKey)
             userDefaults.set(value: longitude, forKey: self.viewModel.longitudeKey)
         }
-        viewModel.fetchCity()
     }
 }
 
