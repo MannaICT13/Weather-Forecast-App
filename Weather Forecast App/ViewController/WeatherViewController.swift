@@ -48,12 +48,12 @@ class WeatherViewController: UIViewController {
         
         if let isCelsius = UserDefaultsManager.shared.value(forKey: Constants.shared.celsiusKey) as? Bool {
             if isCelsius {
-                print("Manna..............................C")
+                viewModel.temperatureUnit = .celsius
             }
         }
         if let isFehrenheit = UserDefaultsManager.shared.value(forKey: Constants.shared.fahrenheitKey) as? Bool {
             if isFehrenheit {
-                print("Munna...........................F")
+                viewModel.temperatureUnit = .fahrenheit
             }
         }
     }
@@ -133,8 +133,8 @@ extension WeatherViewController: UITableViewDataSource {
         let (day,icon, maxTemp, minTemp) = viewModel.firstFiveDays[indexPath.row]
         let min = String(format: "%.2f", minTemp)
         let max = String(format: "%.2f", maxTemp)
-        
-        let temparature = "\(min)°C / \(max)°C"
+        let unit = viewModel.temperatureUnit.rawValue
+        let temparature = "\(min)°\(unit) / \(max)°\(unit)"
         
         let model = ForecastModel(temparature: temparature, dayName: day, imageStr: icon)
         cell.model = model
