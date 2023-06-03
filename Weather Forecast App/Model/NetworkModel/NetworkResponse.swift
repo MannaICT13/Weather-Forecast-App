@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct NetworkResponse<T: Codable>: Codable {
+struct NetworkResponse<T: Codable, N: Codable>: Codable {
     var cod: String
     var message: Int
     var cnt: Int
     var list: T
+    var city: N
 }
