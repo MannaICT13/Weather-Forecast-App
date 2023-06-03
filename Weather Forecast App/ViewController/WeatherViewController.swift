@@ -106,23 +106,6 @@ class WeatherViewController: UIViewController {
         return backgroundColor
     }
     
-    func showLocationAccessAlert() {
-        let alert = UIAlertController(title: "Location Access", message: "Please grant location access to use this feature.", preferredStyle: .alert)
-        
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl)
-            }
-        }
-        alert.addAction(settingsAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
     private func updateUserCurrentLocation() {
         if let lastLocation = locationManager.lastKnownLocation {
             let latitude = lastLocation.coordinate.latitude
