@@ -27,6 +27,8 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.startUpdatingLocation()
+        updateUserCurrentLocation()
         view.addSubview(blurEffectView)
         tableView.refreshControl = refreshControl
         blurEffectView.frame = view.bounds
@@ -35,10 +37,7 @@ class WeatherViewController: UIViewController {
         activityIndicator.center = blurEffectView.contentView.center
         activityIndicator.hidesWhenStopped = true
         startLoading()
-        locationManager.startUpdatingLocation()
-        updateUserCurrentLocation()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -6,11 +6,60 @@
 //
 
 import Foundation
+import Alamofire
+
+extension SettingsViewModel {
+    class Callback {
+        var didSuccess: () -> Void = { }
+        var didFailure: (AFError) -> Void = {_ in }
+    }
+}
 
 class SettingsViewModel {
+    private let userDefaults = UserDefaultsManager.shared
+    private let appid: String = Constants.shared.locationKey
+    private let units: String = Constants.shared.units
     
-    var defaultLatitude = Double()
-    var defaultLongitude = Double()
+    let cityKey: String = Constants.shared.city
+    let latitudeKey = Constants.shared.latitude
+    let longitudeKey = Constants.shared.longitude
+    let darkModeKey = Constants.shared.darkModeKey
+    let celsiusKey = Constants.shared.celsiusKey
+    let fehrenheitKey = Constants.shared.fahrenheitKey
+    
+    let callback = Callback()
+    
+    private var cityResponse: CityResponse?
+    private var weatherResponse: [WeatherResponse] = []
+    
+    var city: String {
+        guard let cityName = cityResponse?.name else { return "Not Found" }
+        return cityName
+    }
+    
+    var coordinate: (Double, Double) {
+        if let lat = userDefaults.value(forKey: latitudeKey) as? Double,
+           let lon = userDefaults.value(forKey: longitudeKey) as? Double {
+            return (lat, lon)
+        }
+        return (.zero, .zero)
+    }
+    
+    var weatherInfo: String {
+        return weatherResponse.first?.weather?.first?.main ?? ""
+    }
+    
+    var temperature: String {
+        let temp = weatherResponse.first?.main?.temp ?? .zero
+        var output: String = ""
+        if let degreeSymbol = "\u{00B0}".unicodeScalars.first {
+            let degreeString = String(degreeSymbol)
+            let temperatureString = String(format: "%.1f", temp)
+            
+            output = temperatureString + degreeString + "C"
+        }
+        return output
+    }
     
     var sections: [[Settings]] {
         var firstSection = [Settings]()
@@ -24,8 +73,20 @@ class SettingsViewModel {
         
         return [firstSection, secondSection, thirdSection]
     }
+    
+    func fetchCity() {
+        WeatherAPIClient.fetchWeatherInfo(latitude: coordinate.0, longitude: coordinate.1, appid: appid, units: units) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.weatherResponse = response.list
+                self?.cityResponse = response.city
+                self?.callback.didSuccess()
+            case .failure(let error):
+                self?.callback.didFailure(error)
+            }
+        }
+    }
 }
-
 
 enum Settings: CaseIterable {
     case celsius

@@ -35,7 +35,7 @@ private struct WeatherRoute: APIRouteable {
 }
 
 enum WeatherAPIClient: GenericAPIClient {
-    static func fetchWeatherInfo(latitude: Double, longitude: Double, appid: String, units: String, completion: @escaping(Result<NetworkResponse<[WeatherResponse]>, AFError>) -> Void) {
+    static func fetchWeatherInfo(latitude: Double, longitude: Double, appid: String, units: String, completion: @escaping(Result<NetworkResponse<[WeatherResponse], CityResponse>, AFError>) -> Void) {
         let parameter = WeatherRoute.Parameter(latitude: latitude, longitude: longitude, appid: appid, units: units)
         let route = WeatherRoute(parameters: parameter)
         startRequest(with: route, completion: completion)

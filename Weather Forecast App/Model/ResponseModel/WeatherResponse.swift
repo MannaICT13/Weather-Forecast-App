@@ -76,3 +76,16 @@ struct Wind: Codable {
 struct Sys: Codable {
     let pod: String?
 }
+
+struct CityResponse: Codable {
+    let id: Int64?
+    let name: String?
+    let coord: Coordinates?
+    let country: String?
+    let population: Int64?
+}
+
+struct Coordinates: Codable {
+    let lat: Double?
+    let lon: Double?
+}
